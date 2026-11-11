@@ -1,18 +1,22 @@
-const express = require('express') // Lembre-se de importar o express
-const app = express()
-const port = 3000
+import express from "express";
+import banco from "./db";
+const app = express();
 
-// 1. Rota de carros
-app.get("/carros/:lanchas", (req, res) => {
-    res.send(req.params)
-})
+app.use(express.json());
 
-// 2. Rota de motos
-app.get("/motos", (req, res) => {
-    res.send("ola pessoal")
-})
+app.get('/alunos', async (req, res)=>{
+    const alunos = await banco.query('select * from alunos') 
+    res.json(alunos);
+});
+app.listen(3000);
 
-// 3. Inicialização do servidor (sempre no final)
-app.listen(port, () => {
-    console.log(`servidor rodando na porta ${port}`)
-})
+
+
+
+
+
+async function funcao1(){
+    await console.log("rodou")
+};
+
+funcao1()
